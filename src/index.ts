@@ -6,6 +6,7 @@ import morgan from "morgan";
 import rateLimit from "express-rate-limit";
 import notFoundMiddleware from "./middlewares/not-found";
 import errorMiddleware from "./middlewares/error";
+import UserRouter from "./routes/user-routes";
 
 const app: Application = express();
 
@@ -21,9 +22,10 @@ app.use(
 );
 
 app.use(express.json());
-app.get("/", (req: Request, res: Response) => {
-  res.send("Welcome to Express & TypeScript Server");
-});
+
+// app.post("/", UserRouter);
+app.use("/", UserRouter);
+
 app.use(notFoundMiddleware);
 app.use(errorMiddleware);
 
